@@ -19,16 +19,16 @@ function populate() {
     else {
         // show question
         var element = document.getElementById("question");
-        element.innerHTML = quiz.getQuestionIndex().text;
+        element.innerHTML = quiz.getQuestionIndex().description;
         var score = document.getElementById("show");
         score.innerHTML = quiz.score;
 
         // show options
-        var choices = quiz.getQuestionIndex().choices;
+        var choices = quiz.getQuestionIndex().answers;
         for(var i = 0; i < choices.length; i++) {
             var element = document.getElementById("choice" + i);
-            element.innerHTML = choices[i];
-            guess("btn" + i, choices[i]);
+            element.innerHTML = choices[i].text;
+            guess("btn" + i, choices[i].text);
 
         }
 
@@ -80,18 +80,35 @@ function countdown(){
         }    
     }, 1000);
 }
-// create questions
-var questions = [
-    new Question("Shi", ["し", "に","き", "い"], "し"),
-    new Question("Na", ["く", "て", "な", "ね"], "な"),
-    new Question("Wa", ["わ", "は","た", "ち"], "わ"),
-    new Question("No", ["と", "の", "か", "つ"], "の"),
-    new Question("Mu", ["ぬ", "と", "さ", "む"], "む"),
-];
+//get questions
+function suffle(array){
+    for(let i=array.length-1;i>0;i--){
+        var j= Math.floor(Math.random() * (i + 1));
+        var temp = array[j];
+        array[j]=array[i];
+        array[i]=temp;
+    }
+}
+var quiz;
+let getQuestions = async () => {
+    const content = document.getElementById("content_quiz").value.toLowerCase();
+    const level = "beginer";
+    const url = 'http://35.229.167.122:3333/questions/key?level='+level+'&content='+content;
+    try {
+        let res = await fetch(url);
+        let questions = await res.json();
+        let result = [];
+        questions.forEach(element => {
+            var q = new Question(element.type,element.level,element.content,element.description,element.answers);
+            suffle(q.answers); 
+            result.push(q);
+        });
+        suffle(result);
+        quiz = new Quiz(result);
+        click();
+    } catch (error) {
+        console.error(error);
+    }
+};
 
-// create quiz
-var quiz = new Quiz(questions);
-
-// display quiz
-click();
 

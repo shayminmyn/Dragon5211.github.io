@@ -5,98 +5,98 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="./css/index.css">
 	<title>Free Quiz</title>
 </head>
 <body>
-	<div id="main">
-		
-		<div id = "start-area">
-			<h1><b>Quiz Competition</b></h1>
-			<div id = "types" class="custom-select" style="width:200px;">
-  				<select>
-    				<option value="0">Select japanese type:</option>
-    				<option value="1"><b>Hiragana(ひらがな)</b></option>
-    				<option value="2"><b>katagana(かたがな)</b></option>
-    				<option value="3"><b>Kanji(かんじ)</b></option>
-  				</select>
+		<div id="main">
+			<div id = "start-area">
+				<h1><b>Quiz Competition</b></h1>
+				<div id = "types" class="custom-select" style="width:200px;">
+					<select id="content_quiz">
+						<option><b>Hiragana</b></option>
+						<option><b>Katagana</b></option>
+					</select>
+				</div>
+				<div class = "controls">
+					<button id = "start-btn" class = "btn" onclick="getQuestions()"><span>Start</span></button>
+				</div>
 			</div>
-			<div class = "controls">
-				<button id = "start-btn" class = "btn"><span>Start</span></button>
+	
+			<div id = "display-left" class = "hide">
+				<span id = "countdown" class="glyphicon glyphicon-time">:<b id = "timer"> 60</b></span>
+				<p id = "score">Score: <span id = "show"></span></p>
 			</div>
-		</div>
-
-		<div id = "display-left" class = "hide">
-			<span id = "countdown" class="glyphicon glyphicon-time">:<b id = "timer"> 60</b></span>
-			<p id = "score">Score: <span id = "show"></span></p>
-		</div>
-		
-		<div id = "display-right" class = "hide">
-			<h2>SCORE BOARD<h2>
-			<table>
-				<tr>
-					<th>Name</th>
-					<th>Score</th>
-				</tr>
-				<tr>
-					<th id = "name-01" class = "tbl">____</th>
-					<th id = "score-01" class = "tbl">____</th>
-				</tr>
-				<tr>
-					<th id = "name-02" class = "tbl">____</th>
-					<th id = "score-02" class = "tbl">____</th>
-				</tr>
-				<tr>
-					<th id = "name-03" class = "tbl">____</th>
-					<th id = "score-03" class = "tbl">____</th>
-				</tr>
-				<tr>
-					<th id = "name-04" class = "tbl">____</th>
-					<th id = "score-04" class = "tbl">____</th>
-				</tr>
-				<tr>
-					<th id = "name-05" class = "tbl">____</th>
-					<th id = "score-05" class = "tbl">____</th>
-				</tr>
-			</table>
-		</div>
-		<div id = "quiz-area" class = "hide">
-			<h1><b>QUIZ</b></h1>
-			<hr style="margin-top: 10px">
 			
-			<p id="question"></p>
-
-			<div id ="button">
-				<button id="btn0"><span id="choice0"></span></button>
-				<button id="btn1"><span id="choice1"></span></button>
-				<button id="btn2"><span id="choice2"></span></button>
-				<button id="btn3"><span id="choice3"></span></button>
+			<div id = "display-right" class = "hide">
+				<h2>SCORE BOARD<h2>
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Score</th>
+					</tr>
+					<tr>
+						<th id = "name-01" class = "tbl">____</th>
+						<th id = "score-01" class = "tbl">____</th>
+					</tr>
+					<tr>
+						<th id = "name-02" class = "tbl">____</th>
+						<th id = "score-02" class = "tbl">____</th>
+					</tr>
+					<tr>
+						<th id = "name-03" class = "tbl">____</th>
+						<th id = "score-03" class = "tbl">____</th>
+					</tr>
+					<tr>
+						<th id = "name-04" class = "tbl">____</th>
+						<th id = "score-04" class = "tbl">____</th>
+					</tr>
+					<tr>
+						<th id = "name-05" class = "tbl">____</th>
+						<th id = "score-05" class = "tbl">____</th>
+					</tr>
+				</table>
 			</div>
-
-			<footer>
-				<hr>
-				<p id="progress">Question x of y.</p>
-			</footer>
-		</div>
-
-		<div id = "restart-area" class = "hide">
-			<p id = "scores"></p>
-			<div id = "name-confirm" class="hide">
-				<input id = "popup-name" class="hide" type="text" name=""></div>
+			<div id = "quiz-area" class = "hide">
+				<h1><b>QUIZ</b></h1>
+				<hr style="margin-top: 10px">
 				
+				<p id="question"></p>
+	
+				<div id ="button">
+					<button id="btn0"><span id="choice0"></span></button>
+					<button id="btn1"><span id="choice1"></span></button>
+					<button id="btn2"><span id="choice2"></span></button>
+					<button id="btn3"><span id="choice3"></span></button>
+				</div>
+	
+				<footer>
+					<hr>
+					<p id="progress">Question x of y.</p>
+				</footer>
 			</div>
-			<div id = "controls-01" class="hide">
-				<a href="index.html"><button id = "restart-btn" class="hide"><span>Restart</span></button></a>
+	
+			<div id = "restart-area" class = "hide">
+				<p id = "scores"></p>
+				<div id = "name-confirm" class="hide">
+					<input id = "popup-name" class="hide" type="text" name="">
+				</div>	
 			</div>
+				<div id = "controls-01" class="hide">
+					<a href="index.html"><button id = "restart-btn" class="hide"><span>Restart</span></button></a>
+				</div>
+			</div>
+			<button id = "enter-btn" class="hide">Enter</button>
+	
 		</div>
-		<button id = "enter-btn" class="hide">Enter</button>
-
-	</div>
 
 
-	<script type="text/javascript" src="../js/question.js"></script>
-	<script type="text/javascript" src="../js/quiz_controller.js"></script>
-	<script type="text/javascript" src="../js/app.js"></script>
-	<script type="text/javascript" src="../js/script.js"></script> 
+		<script type="text/javascript" src="./js/question.js"></script>
+		<script type="text/javascript" src="./js/quiz_controller.js"></script>
+		<script type="text/javascript" src="./js/app.js"></script>
+		<script type="text/javascript" src="./js/script.js"></script>
+		<script type="text/javascript" src="./js/particles.min.js"></script>
+		<script type="text/javascript" src="./js/animation.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
 </body>
 </html>
