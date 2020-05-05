@@ -33,8 +33,8 @@ function populate() {
         }
 
         showProgress();
-     }
-     
+    }
+
 };
 
 //Choose answer
@@ -105,10 +105,67 @@ let getQuestions = async () => {
         });
         suffle(result);
         quiz = new Quiz(result);
-        click();
+        countdown();
+        populate();
+        getLeaderBoard();
     } catch (error) {
         console.error(error);
     }
 };
 
+var leaderboard;
+let getLeaderBoard = async () => {
+    const content = document.getElementById("content_quiz").value.toLowerCase();
+    const level = "beginer";
+    const url = 'http://35.229.167.122:3333/leaderboard?level='+level+'&content='+content;
+    try {
+        let res = await fetch(url);
+        leaderboard = await res.json();
+        loadLeaderBoard(leaderboard.board);
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+let loadLeaderBoard = (board) => {
+    for(let i = 0;i<board.length;i++){
+        let name = document.getElementById('name'+i);
+        let score = document.getElementById('score'+i);
+        name.innerHTML = board[i].name;
+        score.innerHTML = board[i].score;
+    }
+};
+
+
+let saveLeaderBoard = async () => {
+    const name = document.getElementById('popup-name').value;
+    const score = quiz.score;
+    const data = {
+        "name":name,
+        "score":score
+    };
+    leaderboard.board.push(data)
+    leaderboard.board.sort((a,b) => {return b.score - a.score});
+    if(leaderboard.board.length > 5){
+        leaderboard.board.pop()
+    }
+        
+    loadLeaderBoard(leaderboard.board);
+    const content = document.getElementById("content_quiz").value.toLowerCase();
+    const level = "beginer";
+    const url = 'http://35.229.167.122:3333/leaderboard/'+leaderboard._id;
+    try {
+        await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(leaderboard),
+        });
+    } catch (error) {
+        console.error(error);
+    }
+
+}
 

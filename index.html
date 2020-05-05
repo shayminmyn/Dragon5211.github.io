@@ -29,31 +29,31 @@
 			</div>
 			
 			<div id = "display-right" class = "hide">
-				<h2>SCORE BOARD<h2>
+				<h2>Leaderboard<h2>
 				<table>
 					<tr>
 						<th>Name</th>
 						<th>Score</th>
 					</tr>
 					<tr>
-						<th id = "name-01" class = "tbl">____</th>
-						<th id = "score-01" class = "tbl">____</th>
+						<th id = "name0" class = "tbl">____</th>
+						<th id = "score0" class = "tbl">____</th>
 					</tr>
 					<tr>
-						<th id = "name-02" class = "tbl">____</th>
-						<th id = "score-02" class = "tbl">____</th>
+						<th id = "name1" class = "tbl">____</th>
+						<th id = "score1" class = "tbl">____</th>
 					</tr>
 					<tr>
-						<th id = "name-03" class = "tbl">____</th>
-						<th id = "score-03" class = "tbl">____</th>
+						<th id = "name2" class = "tbl">____</th>
+						<th id = "score2" class = "tbl">____</th>
 					</tr>
 					<tr>
-						<th id = "name-04" class = "tbl">____</th>
-						<th id = "score-04" class = "tbl">____</th>
+						<th id = "name3" class = "tbl">____</th>
+						<th id = "score3" class = "tbl">____</th>
 					</tr>
 					<tr>
-						<th id = "name-05" class = "tbl">____</th>
-						<th id = "score-05" class = "tbl">____</th>
+						<th id = "name4" class = "tbl">____</th>
+						<th id = "score4" class = "tbl">____</th>
 					</tr>
 				</table>
 			</div>
@@ -86,11 +86,11 @@
 					<a href="index.html"><button id = "restart-btn" class="hide"><span>Restart</span></button></a>
 				</div>
 			</div>
-			<button id = "enter-btn" class="hide">Enter</button>
+			<button id = "enter-btn" class="hide" onclick="saveLeaderBoard()">Enter</button>
 	
 		</div>
 
-
+		<script type="text/javascript" src="leaderboard.json"></script>
 		<script type="text/javascript" src="./js/question.js"></script>
 		<script type="text/javascript" src="./js/quiz_controller.js"></script>
 		<script type="text/javascript" src="./js/app.js"></script>
